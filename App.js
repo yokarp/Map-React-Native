@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Button } from 'react-native';
 import { Map, Modal, Panel, Input } from './components'
 
 export default function App() {
@@ -19,12 +19,21 @@ export default function App() {
     setNombre(text)
   }
 
+  //Función del botón
+  const handleSubmit = () => {
+    const newPunto = { coordinate: puntoTemp, name: nombre };
+    setPuntos(puntos.concat(newPunto))
+    setVisibility(false)
+    setNombre('')
+  }
+
   return (
     <View style={styles.container} >
       <Map onLongPress={handleLongPress} />
       <Panel />
       <Modal visibility={visibility}>
         <Input title="Nombre" placeholder="Nombre del punto" onChangeText={handleChangeText}/>
+        <Button title="Aceptar" onPress={handleSubmit}/>
       </Modal>
       <StatusBar style="auto" />
     </View>
