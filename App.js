@@ -8,8 +8,10 @@ export default function App() {
   const [nombre, setNombre] = useState('')
   const [puntoTemp, setPuntoTemp] = useState({})
   const [visibility, setVisibility] = useState(false)
+  const [visibilityFilter, setVisibilityFilter] = useState("new_punto")
 
   const handleLongPress= ({ nativeEvent }) =>{
+    setVisibilityFilter('new_punto')
     setPuntoTemp( nativeEvent.coordinate )
     setVisibility(true)
   }
@@ -27,13 +29,24 @@ export default function App() {
     setNombre('')
   }
 
+  const handleLista = () => {
+    setVisibilityFilter('all_puntos')
+    setVisibility(true)
+  }
+
   return (
     <View style={styles.container} >
       <Map onLongPress={handleLongPress} />
-      <Panel />
+      <Panel onPressLeft={handleLista} textLeft='Lista'/>
       <Modal visibility={visibility}>
-        <Input title="Nombre" placeholder="Nombre del punto" onChangeText={handleChangeText}/>
-        <Button title="Aceptar" onPress={handleSubmit}/>
+        {visibilityFilter === 'new_punto'
+          ?
+          <>
+          <Input title="Nombre" placeholder="Nombre del punto" onChangeText={handleChangeText}/>
+          <Button title="Aceptar" onPress={handleSubmit}/>
+          </>
+          : <Text>Lalala</Text>
+        }
       </Modal>
       <StatusBar style="auto" />
     </View>
