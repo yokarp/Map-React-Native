@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, Button } from 'react-native';
-import { Map, Modal, Panel, Input } from './components'
+import { Map, Modal, Panel, Input, List } from './components'
 
 export default function App() {
   const [puntos, setPuntos] = useState([])
@@ -45,7 +45,7 @@ export default function App() {
           <Input title="Nombre" placeholder="Nombre del punto" onChangeText={handleChangeText}/>
           <Button title="Aceptar" onPress={handleSubmit}/>
           </>
-          : <Text>Lalala</Text>
+        : <List puntos={puntos}/>
         }
       </Modal>
       <StatusBar style="auto" />
