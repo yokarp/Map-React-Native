@@ -2,4 +2,5 @@
 
 Proyect React Native practice 
 
-run ```yarn start```
+run
+```yarn start```
